@@ -1,0 +1,10 @@
+<select class="bg-gray-900 border p-2" (change)="sortChanged($event)">
+  @for (variation of variations; track variation.value) {
+  <option
+    [value]="variation.value"
+    [selected]="currentSort() + '_' + currentOrder() === variation.value"
+  >
+    {{ variation.name }}
+  </option>
+  }
+</select>

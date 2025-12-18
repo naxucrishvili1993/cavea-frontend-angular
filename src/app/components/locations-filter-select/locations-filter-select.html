@@ -1,0 +1,8 @@
+<select class="bg-gray-900 border p-2" (change)="locationIdChanged($event)">
+  <option value="all" [selected]="currentLocationId() === 'all'">All Locations</option>
+  @for (location of locations(); track location.id) {
+  <option [value]="location.id" [selected]="+currentLocationId() === location.id">
+    {{ location.address }}
+  </option>
+  }
+</select>

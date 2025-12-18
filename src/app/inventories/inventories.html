@@ -1,1 +1,23 @@
-<p>inventories works!</p>
+<div class="flex items-center justify-between">
+  <a routerLink="/add-inventory">Add Inventory</a>
+  <a routerLink="/manage-locations" class="me-auto ms-2">Manage Locations</a>
+  <a routerLink="/statistics">Statistics</a>
+</div>
+
+@if (loading()) {
+<app-loading />
+} @else { @if(error()) {
+<p class="text-red-500">{{ error() }}</p>
+} @else { @if (inventories().length > 0) {
+<app-inventory-table
+  [inventories]="inventories()"
+  (inventoryDeleted)="onInventoryDelete($event)"
+  [page]="page"
+  [totalInventories]="count()"
+/>
+} @else {
+<p class="text-center mt-20 text-gray-500">No inventories found.</p>
+<a routerLink="/add-inventory" class="mt-4 block text-center underline">
+  Add a new inventory item
+</a>
+} }}

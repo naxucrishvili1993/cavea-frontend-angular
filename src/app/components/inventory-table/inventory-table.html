@@ -1,0 +1,48 @@
+<div class="py-8 px-5 max-w-[1200px] mx-auto">
+  <div class="flex justify-between items-center mb-5">
+    <h1 class="text-2xl font-bold m-0">Inventories</h1>
+    <div class="flex gap-2">
+      <!-- <LocationsFilterSelect />
+      <SortingFilters /> -->
+    </div>
+  </div>
+
+  <div class="flex my-6 gap-3">
+    <app-locations-filter-select />
+    <app-sorting-filters />
+  </div>
+
+  <table class="w-full border-collapse border border-gray-500">
+    <thead>
+      <tr>
+        <th class="p-3 text-left font-semibold border-b border-gray-500 w-[100px]">ID</th>
+        <th class="p-3 text-left font-semibold border-b border-gray-500">Name</th>
+        <th class="p-3 text-left font-semibold border-b border-gray-500">Description</th>
+        <th class="p-3 text-left font-semibold border-b border-gray-500">Price</th>
+        <th class="p-3 text-left font-semibold border-b border-gray-500">Location</th>
+        <th class="p-3 text-right font-semibold border-b border-gray-500 w-[120px]">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (inventory of inventories(); track inventory.id) {
+      <tr class="">
+        <td class="p-3 border-b border-gray-500">{{ inventory.id }}</td>
+        <td class="p-3 border-b border-gray-500">{{ inventory.name }}</td>
+        <td class="p-3 border-b border-gray-500">{{ inventory.description }}</td>
+        <td class="p-3 border-b border-gray-500">₾{{ inventory.price }}</td>
+        <td class="p-3 border-b border-gray-500">{{ inventory.location }}</td>
+        <td class="p-3 border-b border-gray-500 text-right">
+          <button
+            class="px-4 py-2 border border-red-600 bg-gray-200 text-red-600 rounded cursor-pointer text-sm font-bold"
+            (click)="onDelete(inventory)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <app-pagination [currentPage]="page()" [totalProducts]="totalInventories()" />
+</div>

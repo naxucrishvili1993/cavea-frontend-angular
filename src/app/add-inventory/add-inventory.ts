@@ -1,15 +1,15 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { LocationData } from '../../types/location';
 import { Locations as LocationsService } from '../services/locations';
 import { catchError } from 'rxjs';
 import { Inventories as InventoriesService } from '../services/inventories';
-import { Inventory } from '../../types/inventory';
-import { ToastrService } from 'ngx-toastr';
+import { BackLink } from '../components/back-link/back-link';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-add-inventory',
-  imports: [RouterLink],
+  imports: [BackLink],
   templateUrl: './add-inventory.html',
   styles: ``,
 })
@@ -37,7 +37,7 @@ export class AddInventory implements OnInit {
       .getLocationsAndInventoryCounts()
       .pipe(
         catchError((err) => {
-          console.log(`Failed to load locations data ${err.message}`);
+          toast.error(`Failed to load locations data ${err.message}`);
           return [];
         })
       )
@@ -91,6 +91,7 @@ export class AddInventory implements OnInit {
         })
       )
       .subscribe(() => {
+        toast.success('Inventory created successfully.');
         this.router.navigate(['/inventories']);
       });
   }

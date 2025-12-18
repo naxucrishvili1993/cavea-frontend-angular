@@ -1,14 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { getLocationsAndInventoryCounts } from '../../api/inventories';
-import { HttpClient } from '@angular/common/http';
-import { Locations as LocationsService } from '../services/locations';
-import { LocationData } from '../../types/location';
 import { catchError } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { LocationData } from '../../types/location';
+import { BackLink } from '../components/back-link/back-link';
+import { Locations as LocationsService } from '../services/locations';
+import { Loading } from '../components/loading/loading';
 
 @Component({
   selector: 'app-statistics',
-  imports: [RouterLink],
+  imports: [BackLink, Loading],
   templateUrl: './statistics.html',
   styles: ``,
 })

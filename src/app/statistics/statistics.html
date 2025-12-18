@@ -1,7 +1,7 @@
+<app-back-link />
+
 @if (loading()) {
-<div class="w-full h-dvh overflow-hidden flex justify-center items-center">
-  <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-900"></div>
-</div>
+<app-loading />
 } @if(error()) {
 <div class="text-red-500">
   An error occurred while loading statistics.
@@ -11,7 +11,6 @@
 <div class="text-gray-500">No location statistics available.</div>
 } @if(locationsData().length > 0 && !loading() && !error()) {
 <div class="p-6">
-  <a routerLink="/inventories">← Go to Inventories</a>
   <table class="w-full max-w-[500px] mx-auto mt-20 border-collapse px-5 sm:px-10 lg:px-20">
     <thead>
       <tr class="border-b">
@@ -23,7 +22,7 @@
     <tbody>
       @for (loc of locationsData(); track loc.id) {
       <tr class="border-b hover:bg-muted/50">
-        <td class="p-3"></td>
+        <td class="p-3">{{ loc.address }}</td>
         <td class="text-right p-3">{{ loc.inventoryCount }}</td>
         <td class="text-right p-3">₾{{ loc.totalPrice }}</td>
       </tr>

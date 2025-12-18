@@ -2,10 +2,14 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Locations as LocationsService } from '../services/locations';
 import { Location } from '../../types/location';
 import { catchError, map } from 'rxjs';
+import { BackLink } from '../components/back-link/back-link';
+import { Loading } from '../components/loading/loading';
+import { toast } from 'ngx-sonner';
+import { LocationItem } from '../components/location-item/location-item';
 
 @Component({
   selector: 'app-manage-locations',
-  imports: [],
+  imports: [BackLink, Loading, LocationItem],
   templateUrl: './manage-locations.html',
   styles: ``,
 })
@@ -23,6 +27,7 @@ export class ManageLocations implements OnInit {
         catchError((error) => {
           console.error('Failed to load locations', error);
           this.locations.set([]);
+          this.loading.set(false);
           return [];
         })
       )
@@ -30,8 +35,6 @@ export class ManageLocations implements OnInit {
         this.locations.set(data.locations);
         this.loading.set(false);
       });
-
-    console.log(this.locations());
   }
 
   setLocationName(event: Event) {
@@ -62,7 +65,7 @@ export class ManageLocations implements OnInit {
         })
       )
       .subscribe((newLocation) => {
-        console.log('Location created successfully.');
+        toast.success('Location created successfully.');
         this.locations.update((locs) => [...locs, newLocation]);
         this.locationName.set('');
       });
@@ -79,7 +82,7 @@ export class ManageLocations implements OnInit {
         })
       )
       .subscribe(() => {
-        console.log('Location deleted successfully.');
+        toast.success('Location deleted successfully.');
         this.locations.update((locs) => locs.filter((loc) => loc.id !== id));
       });
   }

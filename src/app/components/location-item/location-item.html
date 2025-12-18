@@ -1,0 +1,30 @@
+<td class="px-4 py-3 text-sm">{{ location().id }}</td>
+<td class="px-4 py-3 text-sm">
+  @if (isEditing()) {
+  <div class="flex gap-2">
+    <input
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [value]="editedAddress()"
+      (change)="onAddressChange($event)"
+    />
+    <button (click)="update()" class="text-blue-600 cursor-pointer">Update</button>
+  </div>
+  } @else {
+
+  <span>{{ location().address }}</span>
+  }
+</td>
+<td class="px-4 py-3 text-right flex gap-3 justify-end items-center">
+  <button
+    (click)="onDelete(location().id)"
+    class="text-red-600 hover:text-red-800 text-sm font-medium focus:outline-none"
+  >
+    Delete
+  </button>
+  <button
+    (click)="toggleEdit()"
+    class="text-blue-600 hover:text-blue-800 text-sm font-medium focus:outline-none"
+  >
+    Edit
+  </button>
+</td>

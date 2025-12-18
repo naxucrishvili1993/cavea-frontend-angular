@@ -1,3 +1,8 @@
+<app-back-link />
+
+@if (loading()) {
+<app-loading />
+} @else {
 <div class="p-6 max-w-4xl mx-auto">
   <div class="mb-6">
     <h1 class="text-2xl font-semibold">Manage Locations</h1>
@@ -35,20 +40,14 @@
       </thead>
       <tbody class="divide-y divide-gray-200">
         @for (location of locations(); track location.id) {
-        <tr>
-          <td class="px-4 py-3 text-sm">{{ location.id }}</td>
-          <td class="px-4 py-3 text-sm">{{ location.address }}</td>
-          <td class="px-4 py-3 text-right">
-            <button
-              (click)="handleDelete(location.id)"
-              class="text-red-600 hover:text-red-800 text-sm font-medium focus:outline-none"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
+        <tr
+          app-location-item
+          [location]="location"
+          (locationDeleted)="handleDelete($event.locationId)"
+        ></tr>
         }
       </tbody>
     </table>
   </div>
 </div>
+}

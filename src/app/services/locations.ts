@@ -45,4 +45,8 @@ export class Locations {
       })
     );
   }
+
+  updateLocation(id: number, address: string) {
+    return this.http.patch<{ location: Location }>(`${API}/locations/${id}`, { address });
+  }
 }
