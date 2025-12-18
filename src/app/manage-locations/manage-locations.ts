@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Locations as LocationsService } from '../services/locations';
+import { toast } from 'ngx-sonner';
+import { catchError } from 'rxjs';
 import { Location } from '../../types/location';
-import { catchError, map } from 'rxjs';
 import { BackLink } from '../components/back-link/back-link';
 import { Loading } from '../components/loading/loading';
-import { toast } from 'ngx-sonner';
 import { LocationItem } from '../components/location-item/location-item';
+import { Locations as LocationsService } from '../services/locations';
 
 @Component({
   selector: 'app-manage-locations',

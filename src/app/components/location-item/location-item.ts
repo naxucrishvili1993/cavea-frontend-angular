@@ -1,8 +1,8 @@
 import { Component, inject, input, OnInit, output, signal } from '@angular/core';
+import { toast } from 'ngx-sonner';
+import { catchError, map } from 'rxjs';
 import { Location } from '../../../types/location';
 import { Locations as LocationsService } from '../../services/locations';
-import { catchError, map } from 'rxjs';
-import { toast } from 'ngx-sonner';
 
 @Component({
   selector: '[app-location-item]',

@@ -1,10 +1,10 @@
-import { Component, inject, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Inventory } from '../../types/inventory';
-import { Inventories as InventoriesService } from '../services/inventories';
 import { catchError, map } from 'rxjs';
-import { Loading } from '../components/loading/loading';
+import { Inventory } from '../../types/inventory';
 import { InventoryTable } from '../components/inventory-table/inventory-table';
+import { Loading } from '../components/loading/loading';
+import { Inventories as InventoriesService } from '../services/inventories';
 
 @Component({
   selector: 'app-inventories',
